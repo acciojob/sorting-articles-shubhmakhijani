@@ -3,59 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sorted Band List</title>
+    <title>Sorted Articles</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            max-width: 600px;
-            margin: 0 auto;
-            padding: 20px;
-            line-height: 1.6;
-        }
-        h1 {
-            color: #333;
-            text-align: center;
-        }
-        #band {
-            list-style-type: none;
-            padding: 0;
-        }
-        #band li {
-            padding: 10px;
-            margin: 5px 0;
             background-color: #f4f4f4;
-            border-radius: 5px;
-            transition: background-color 0.3s;
+            padding: 20px;
         }
-        #band li:hover {
-            background-color: #e0e0e0;
+        ul {
+            list-style-type: none;
+            background: white;
+            padding: 20px;
+            max-width: 400px;
+            margin: auto;
+            border-radius: 5px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        li {
+            padding: 5px 0;
         }
     </style>
 </head>
 <body>
-    <h1>Sorted Band List</h1>
+    <h1>Sorted Articles</h1>
     <ul id="band"></ul>
 
     <script>
-        const bands = ['The Plot in You', 'The Devil Wears Prada', 'Pierce the Veil', 'Norma Jean', 'The Bled', 'Say Anything', 'The Midway State', 'We Came as Romans', 'Counterparts', 'Oh, Sleeper', 'A Skylit Drive', 'Anywhere But Here', 'An Old Dog'];
+        const bands = [
+            'The Plot in You', 'The Devil Wears Prada', 'Pierce the Veil', 'Norma Jean',
+            'The Bled', 'Say Anything', 'The Midway State', 'We Came as Romans',
+            'Counterparts', 'Oh, Sleeper', 'A Skylit Drive', 'Anywhere But Here', 'An Old Dog'
+        ];
 
-        // Function to remove articles for sorting
-        function stripArticles(bandName) {
-            return bandName.replace(/^(a |an |the )/i, '').trim();
+        function stripArticle(name) {
+            return name.replace(/^(a |an |the )/i, '').trim();
         }
 
-        // Sort bands ignoring articles
-        const sortedBands = bands.sort((a, b) => {
-            return stripArticles(a).localeCompare(stripArticles(b));
-        });
+        const sortedBands = bands.sort((a, b) => stripArticle(a).localeCompare(stripArticle(b)));
 
-        // Display the sorted list
-        const bandList = document.getElementById('band');
-        sortedBands.forEach(band => {
-            const li = document.createElement('li');
-            li.textContent = band;
-            bandList.appendChild(li);
-        });
+        document.getElementById('band').innerHTML = sortedBands.map(band => `<li>${band}</li>`).join('');
     </script>
 </body>
 </html>
